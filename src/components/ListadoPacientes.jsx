@@ -8,8 +8,9 @@ const ListadoPacientes = ({pacientes}) => {
                 Administra tus {''}
                 <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
             </p>
-            { pacientes.map( paciente => (
+            { pacientes.map( (paciente) => (
                 <Pacientes 
+                    key={paciente.id}
                     paciente={paciente}
                 />
             ))}
