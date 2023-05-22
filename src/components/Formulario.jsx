@@ -9,8 +9,14 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
     const [sintomas, setSintomas] = useState('')
     const [error, setError] = useState(false)
 
-    useEffect(() =>{
-        console.log(paciente)
+      useEffect(() => {
+        if( Object.keys(paciente).length > 0  ) {
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setAlta(paciente.alta)
+            setSintomas(paciente.sintomas)
+        }
     }, [paciente])
 
     const generarId = () => {
@@ -128,7 +134,7 @@ const Formulario = ({ pacientes, setPacientes, paciente }) => {
                 <input 
                     type="submit" 
                     className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-colors"
-                    value="Agregar paciente"
+                    value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
                 />
             </form>
         </div>
