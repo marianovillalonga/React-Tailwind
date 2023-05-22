@@ -1,7 +1,8 @@
 import Header from './components/Header'
 import Formulario from './components/Formulario'
 import ListadoPacientes from './components/ListadoPacientes'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import { stringify } from 'postcss'
 
 function App() {
   const [pacientes, setPacientes] = useState([])
@@ -11,6 +12,18 @@ function App() {
     const pacientesActualizados = pacientes.filter( paciente => paciente.id !== id)
     setPacientes(pacientesActualizados)
   }
+
+  useEffect(()=>{
+    const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? []
+      setPacientes(pacientesLS)
+    }
+    obtenerLS()
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem('pacientes', JSON.stringify(pacientes))
+  }, [pacientes])
 
   return (
     <div className='container mx-auto mt-20'>
